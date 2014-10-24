@@ -6,14 +6,13 @@ Only Column names containing mean() and std() were extracted based on the defini
 The dataset contains the following variables in this order
 
 * subject: subject id (30 different numbered subjects)
-* activity: activity performed (descriptive string)
-	*six different activities: 
-		1 WALKING
-		2 WALKING_UPSTAIRS
-		3 WALKING_DOWNSTAIRS
-		4 SITTING
-		5 STANDING
-		6 LAYING
+* activity: activity performed (descriptive string), six different activities: 
+	*	1 WALKING
+	*	2 WALKING_UPSTAIRS
+	*	3 WALKING_DOWNSTAIRS
+	*	4 SITTING
+	*	5 STANDING
+	*	6 LAYING
  
 * average of the mean values of the following variables listed in the feature_info file:
 	* tBodyAcc-XYZ 		(3 Variables, X, Y and Z)   
@@ -34,17 +33,17 @@ The dataset contains the following variables in this order
 	* fBodyGyroMag
 	* fBodyGyroJerkMag
 	
-	###Explanation to the Variable names:
-	* t: time domain signals (captured at a rate of 50Hz)
-	* f: Fast Fourier Transform applied to the time domain signals
-	* GravityAcc: Gravity acceleration signals from the accelerometer
-	* BodyAcc: Body acceleration signals from the accelerometer
-	* BodyGyro: Measurements from the gyroscope
-	* Jerk: Jerk signals
-	* Mag: Magnitude of the three dimensional signals calculated using the Euclidean norm
-	* XYZ: Dimension of the respective measurement or variable
-	
 * standard deviation values of the variables listed under the third point
+
+###Explanation to the Variable names:
+* t: time domain signals (captured at a rate of 50Hz)
+* f: Fast Fourier Transform applied to the time domain signals
+* GravityAcc: Gravity acceleration signals from the accelerometer
+* BodyAcc: Body acceleration signals from the accelerometer
+* BodyGyro: Measurements from the gyroscope
+* Jerk: Jerk signals
+* Mag: Magnitude of the three dimensional signals calculated using the Euclidean norm
+* XYZ: Dimension of the respective measurement or variable
 
 The dataset has in total 180 rows and 68 columns
 
