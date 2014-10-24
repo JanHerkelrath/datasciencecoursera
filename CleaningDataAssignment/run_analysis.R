@@ -1,5 +1,6 @@
-## load the plyr package
+## load the plyr and dplyr package
 library(plyr)
+library(dplyr)
 
 ## Check if the file is in the current working directory and download it if necessary
 if(!file.exists("./UCI HAR Dataset")){
@@ -31,9 +32,7 @@ testMerge <- cbind(subject_test,y_test,X_test[,meanIndex],X_test[,stdIndex])
 trainMerge <- cbind(subject_train,y_train,X_train[,meanIndex],X_train[,stdIndex])
 
 ## Merge the test and training data into one data.frame
-## and sort it according to the first two columns in the data.frame in ascending order
 merged <- rbind(trainMerge,testMerge)
-merged <- arrange(merged, merged[,1], merged[,2])
 
 ## Set the column names of the data.frame using the features list 
 columnNames <- names(merged)
@@ -44,17 +43,17 @@ columnNames[(3+sum(meanIndex)):length(columnNames)] <- features[stdIndex,2]
 names(merged) <- columnNames
 
 ## Change the values of the activity column to the respective labels
+## and sort it according to the first two columns in the data.frame in ascending order
+merged <- arrange(merged, subject, activity)
 merged$activity <- activity_labels[merged$activity,2]
+merged$activity <- factor(merged$activity, levels = activity_labels[,2])
 
 ## Save the merged dataset to a .txt file
-write.table(merged,"mergedDataset.txt", row.names=F)
+write.table(merged,"mergedDataset.txt", row.names=FALSE)
 
 ## Create a new dataset taking the mean of each variable grouped by the subject id and the activity
-mergedAverage <- aggregate(.~subject+activity,merged,mean)
-
-## Set the order of the activity labels and sort dataset using the first two columns in ascending order
-levels(mergedAverage$activity) <- activity_labels[,2]
-mergedAverage <- arrange(mergedAverage, mergedAverage$subject, mergedAverage$activity)
+mergedAverage <- merged %>% group_by(subject, activity) %>% summarise_each(funs(mean))
 
 ## Save the final dataset to a .txt file
-write.table(mergedAverage,"mergedAveragedDataset.txt", row.names=F)
+write.table(mergedAverage,"mergedAveragedDataset.txt", row.names=FALSE)
+
